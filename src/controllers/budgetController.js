@@ -61,6 +61,20 @@ const deleteBudget = async (req, res) => {
   }
 };
 
+const getBudgetById = async (req, res) => {
+  try {
+    const budget = await Budget.findOne({ _id: req.params.budgetId, eventId: req.params.eventId });
+
+    if (!budget) {
+      return res.status(404).json({ message: 'Budget item not found' });
+    }
+
+    res.json(budget);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching budget item', error });
+  }
+};
+
 // Budget analytics for an event
 const getBudgetAnalytics = async (req, res) => {
   try {
@@ -89,4 +103,4 @@ const getBudgetAnalytics = async (req, res) => {
   }
 };
 
-module.exports = { getBudgets, addBudget, updateBudget, deleteBudget, getBudgetAnalytics };
+module.exports = { getBudgets, addBudget, updateBudget, deleteBudget, getBudgetAnalytics, getBudgetById };

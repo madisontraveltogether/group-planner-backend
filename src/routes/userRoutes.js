@@ -6,6 +6,6 @@ const router = express.Router();
 
 // Protected routes
 router.get('/profile', authMiddleware, getUserProfile); // Get user profile
-router.put('/profile', authMiddleware, updateUserProfile); // Update user profile
+router.patch('/profile', authMiddleware, updateUserProfile); // Update user profile
 
 module.exports = router;

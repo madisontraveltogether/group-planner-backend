@@ -10,6 +10,20 @@ const getTasks = async (req, res) => {
   }
 };
 
+const getTaskById = async (req, res) => {
+    try {
+      const task = await Task.findOne({ _id: req.params.taskId, eventId: req.params.eventId });
+  
+      if (!task) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+  
+      res.json(task);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching task', error });
+    }
+}
+
 // Add a task to an event
 const addTask = async (req, res) => {
   try {
@@ -62,4 +76,4 @@ const deleteTask = async (req, res) => {
   }
 };
 
-module.exports = { getTasks, addTask, updateTask, deleteTask };
+module.exports = { getTasks, addTask, updateTask, deleteTask, getTaskById };

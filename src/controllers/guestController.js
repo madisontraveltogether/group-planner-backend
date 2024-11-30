@@ -20,6 +20,20 @@ const getGuests = async (req, res) => {
   }
 };
 
+const getGuestById = async (req, res) => {
+    try {
+      const guest = await Guest.findOne({ _id: req.params.guestId, eventId: req.params.eventId });
+  
+      if (!guest) {
+        return res.status(404).json({ message: 'Guest not found' });
+      }
+  
+      res.json(guest);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching guest', error });
+    }
+  };
+
 // Add a primary guest and group members
 const addGuests = async (req, res) => {
   try {
@@ -103,4 +117,4 @@ const deleteGuest = async (req, res) => {
   }
 };
 
-module.exports = { getGuests, addGuests, updateGuest, deleteGuest };
+module.exports = { getGuests, addGuests, updateGuest, deleteGuest, getGuestById };

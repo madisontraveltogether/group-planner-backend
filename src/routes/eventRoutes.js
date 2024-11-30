@@ -19,7 +19,7 @@ const router = express.Router();
 router.get('/', authMiddleware, getEvents); // Get all events for the logged-in user
 router.get('/:id', authMiddleware, getEventById); // Get a specific event
 router.post('/', authMiddleware, createEvent); // Create a new event
-router.put('/:id', authMiddleware, updateEvent); // Update an event
+router.patch('/:id', authMiddleware, updateEvent); // Update an event
 router.delete('/:id', authMiddleware, deleteEvent); // Delete an event
 
 
